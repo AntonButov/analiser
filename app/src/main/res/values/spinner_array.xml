@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+    <string-array name="spiner_array">
+        <item></item>
+        <item>A</item>
+        <item>K</item>
+        <item>Q</item>
+        <item>J</item>
+        <item>10</item>
+        <item>9</item>
+        <item>8</item>
+        <item>7</item>
     </string-array>
 </resources>
