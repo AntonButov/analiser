@@ -1,6 +1,7 @@
 package pro.butovanton.analizer;
 
 import android.content.Context;
+import android.view.Display;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -43,6 +44,21 @@ public class InstrumentedTest {
     public void read() throws FileNotFoundException {
         InputStream inputStream = context.getResources().openRawResource(R.raw.chance);
         CSVReader csvReader = new CSVReader(inputStream);
-        List read = csvReader.read();
+        List<String> read = csvReader.read();
+        assertTrue(read.size() > 0);
+        Model model = new Model(read);
+        String[] result;
+        result = model.find("K");
+        assertTrue(result[0].equals(""));
+        assertTrue(result[1].equals("7"));
+        result = model.find("1");
+        assertTrue(result[0].equals("7"));
+        assertTrue(result[1].equals("J"));
+        result = model.find("797");
+        assertTrue(result[0].equals("KA9"));
+        assertTrue(result[1].equals("9K9"));
+        result = model.find("JAQ1");
+        assertTrue(result[0].equals("7977"));
+        assertTrue(result[1].equals("17A7"));
     }
 }

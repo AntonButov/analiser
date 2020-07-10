@@ -15,14 +15,20 @@ public class CSVReader {
         this.inputStream = inputStream;
     }
 
-    public List read() {
-        List resultList = new ArrayList();
+    public List<String> read() {
+        List<String> resultList = new ArrayList();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         try {
             String csvLine;
+            reader.readLine();
             while ((csvLine = reader.readLine()) != null) {
                 String[] row = csvLine.split(",");
-                resultList.add(row);
+                csvLine = "";
+                for (int i = 2; i <= 5; i++) {
+                    if (row[i].equals("10")) row[i] = "1";
+                    csvLine = csvLine + row[i];
+                }
+                resultList.add(csvLine);
 
             }
         } catch (IOException ex) {
