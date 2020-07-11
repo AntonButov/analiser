@@ -27,12 +27,23 @@ public class MainActivity extends AppCompatActivity {
 
     private Spinner spinner1, spinner2, spinner3, spinner4;
     private Button buttonFind, buttonClear;
+    private TextView textView1up, textView2up, textView3up, textView4up;
+    private TextView textView1Down, textView2Down, textView3Down, textView4Down;
     private String findStr1 = "", findStr2 = "", findStr3 = "", findStr4 = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        textView1up = findViewById(R.id.textView1up);
+        textView2up = findViewById(R.id.textView2up);
+        textView3up = findViewById(R.id.textView3up);
+        textView4up = findViewById(R.id.textView4up);
+        textView1Down = findViewById(R.id.textView1down);
+        textView2Down = findViewById(R.id.textView2down);
+        textView3Down = findViewById(R.id.textView3down);
+        textView4Down = findViewById(R.id.textView4down);
 
         spinner1 = findViewById(R.id.spinner);
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.spiner_array, android.R.layout.simple_spinner_item);
@@ -95,12 +106,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        InputStream inputStream = null;
-        try {
-            inputStream = new FileInputStream("/sdcard/Download/Chance.csv");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        InputStream inputStream = getResources().openRawResource(R.raw.chance);
+    //    InputStream inputStream = null;
+   //     try {
+   //         inputStream = new FileInputStream("/sdcard/Download/Chance.csv");
+   //     } catch (FileNotFoundException e) {
+   //         e.printStackTrace();
+   //     }
 
         CSVReader csvReader = new CSVReader(inputStream);
         final Model model = new Model(csvReader.read());
@@ -108,9 +120,31 @@ public class MainActivity extends AppCompatActivity {
         buttonFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String[] result;
                 String findStr = findStr1 + findStr2 + findStr3 + findStr4;
-                if (!findStr.equals(""))
-                        model.find(findStr);
+                if (!findStr.equals("")) {
+                    result = model.find(findStr);
+                    for (int i = 0; i < findStr.length(); i++) {
+                        switch (i) {
+                            case (0):
+                            textView1up.setText(parseResult(result[0], i));
+                            textView1Down.setText(parseResult(result[1], i));
+                            break;
+                            case (1):
+                            textView2up.setText(parseResult(result[0], 1));
+                            textView2Down.setText(parseResult(result[1], 1));
+                            break;
+                            case (2):
+                            textView3up.setText(parseResult(result[0], 2));
+                            textView3Down.setText(parseResult(result[1], 2));
+                            break;
+                            case (3):
+                            textView4up.setText(parseResult(result[0], 3));
+                            textView4Down.setText(parseResult(result[1], 3));
+                            break;
+                        }
+                    }
+                }
             }
         });
         buttonClear = findViewById(R.id.buttonClear);
@@ -121,8 +155,25 @@ public class MainActivity extends AppCompatActivity {
                 spinner2.setSelection(0);
                 spinner3.setSelection(0);
                 spinner4.setSelection(0);
+                textView1up.setText("");
+                textView2up.setText("");
+                textView3up.setText("");
+                textView4up.setText("");
+                textView1Down.setText("");
+                textView2Down.setText("");
+                textView3Down.setText("");
+                textView4Down.setText("");
             }
         });
+    }
+
+    private String parseResult(String result, int n) {
+        String resultParse = "";
+        if (!result.equals("")) {
+            resultParse = String.valueOf(result.charAt(n));
+            if (resultParse.equals("1")) resultParse = "10";
+        }
+        return resultParse;
     }
 
     @Override
