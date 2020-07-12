@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     final String[] carts = {"", "A", "K", "Q", "J", "1", "9", "8", "7"};
 
     private int search_type = SEARCHTYPE.LEFT;
+    private RadioGroup radioGroupFindType;
 
     private Spinner spinner1, spinner2, spinner3, spinner4;
     private Button buttonFind, buttonClear;
@@ -131,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 String[] result;
                 String findStr = findStr1 + findStr2 + findStr3 + findStr4;
                 if (!findStr.equals("")) {
-                    result = model.find(findStr);
+                    result = model.findSelector(findStr, search_type);
                     for (int i = 0; i < findStr.length(); i++) {
                         switch (i) {
                             case (0):
@@ -171,6 +173,28 @@ public class MainActivity extends AppCompatActivity {
                 textView2Down.setText("");
                 textView3Down.setText("");
                 textView4Down.setText("");
+            }
+        });
+
+        radioGroupFindType = findViewById(R.id.radioGroupFindType);
+        radioGroupFindType.check(R.id.radioButtonLeft);
+        radioGroupFindType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.radioButtonLeft:
+                        search_type = SEARCHTYPE.LEFT;
+                        break;
+                    case R.id.radioButtonRight:
+                        search_type = SEARCHTYPE.RIGT;
+                        break;
+                    case R.id.radioButtonUp:
+                        search_type = SEARCHTYPE.UP;
+                        break;
+                    case R.id.radioButtonDoun:
+                        search_type = SEARCHTYPE.DOWN;
+                        break;
+                }
             }
         });
     }

@@ -12,6 +12,25 @@ public class Model {
     public Model(List<String> data) {
         this.data = data;
     }
+    
+    public String[] findSelector(String findedStr, int findType) {
+        String[] result = new String[2];
+        switch (findType) {
+            case SEARCHTYPE.LEFT:
+                result = find(findedStr);
+                break;
+            case SEARCHTYPE.RIGT:
+                result = find(flip(findedStr));
+                break;
+
+        }
+    return result;    
+    }
+
+    private String flip(String str) {
+        StringBuilder sb = new StringBuilder(str);
+        return sb.reverse().toString();
+    }
 
     public String[] find(String findedStr) {
         String[] result = new String[2];
