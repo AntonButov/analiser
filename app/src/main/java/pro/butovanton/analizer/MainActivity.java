@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 100;
     final String[] carts = {"", "A", "K", "Q", "J", "1", "9", "8", "7"};
 
+    private int search_type = SEARCHTYPE.LEFT;
+
     private Spinner spinner1, spinner2, spinner3, spinner4;
     private Button buttonFind, buttonClear;
     private TextView textView1up, textView2up, textView3up, textView4up;
