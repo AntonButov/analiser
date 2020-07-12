@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.FileInputStream;
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView1Down, textView2Down, textView3Down, textView4Down;
     private String findStr1 = "", findStr2 = "", findStr3 = "", findStr4 = "";
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,12 +111,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         InputStream inputStream = getResources().openRawResource(R.raw.chance);
-    //    InputStream inputStream = null;
-   //     try {
-   //         inputStream = new FileInputStream("/sdcard/Download/Chance.csv");
-   //     } catch (FileNotFoundException e) {
-   //         e.printStackTrace();
-   //     }
+//        InputStream inputStream = null;
+//        try {
+//            FileInputStream fis = new FileInputStream(getDataDir() + "/Chance.csv" );
+//            Log.d("DEBUG", fis.toString());
+//           inputStream = fis;
+//       } catch (FileNotFoundException e) {
+//           e.printStackTrace();
+//       }
 
         CSVReader csvReader = new CSVReader(inputStream);
         final Model model = new Model(csvReader.read());
@@ -187,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
                 if (shouldShowRequestPermissionRationale(
                         Manifest.permission.READ_EXTERNAL_STORAGE)) {
                     // Explain to the user why we need to read the contacts
+
                 }
 
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
