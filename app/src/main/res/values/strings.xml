@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">analizer</string>
+    <string name="kartNotFind">Карты не выбраны.</string>
 </resources>

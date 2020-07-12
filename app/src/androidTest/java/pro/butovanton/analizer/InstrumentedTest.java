@@ -41,7 +41,7 @@ public class InstrumentedTest {
 
 
     @Test
-    public void read() throws FileNotFoundException {
+    public void check() throws FileNotFoundException {
         InputStream inputStream = context.getResources().openRawResource(R.raw.chance);
         CSVReader csvReader = new CSVReader(inputStream);
         List<String> read = csvReader.read();
@@ -60,5 +60,19 @@ public class InstrumentedTest {
         result = model.find("JAQ1");
         assertTrue(result[0].equals("7977"));
         assertTrue(result[1].equals("17A7"));
+        result = model.findVert("K");
+        assertTrue(result[1].equals("A"));
+        result = model.findVert("79");
+        assertTrue(result[0].equals(""));
+        assertTrue(result[1].equals("9K"));
+        result = model.findVert("A9");
+        assertTrue(result[0].equals("K7"));
+        assertTrue(result[1].equals("97"));
+        result = model.findVert("9K9A");
+        assertTrue(result[0].equals("797J"));
+        assertTrue(result[1].equals("797Q"));
+        result = model.findVert("71J7");
+        assertTrue(result[0].equals("9797"));
+        assertTrue(result[1].equals(""));
     }
 }

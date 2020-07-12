@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                clearResult();
                 findStr1 = carts[position];
             }
 
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                clearResult();
                 findStr2 = carts[position];
             }
 
@@ -90,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                clearResult();
                 findStr3 = carts[position];
             }
 
@@ -105,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         spinner4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                clearResult();
                 findStr4 = carts[position];
             }
 
@@ -130,9 +135,15 @@ public class MainActivity extends AppCompatActivity {
         buttonFind.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+             clearResult();
                 String[] result;
                 String findStr = findStr1 + findStr2 + findStr3 + findStr4;
-                if (!findStr.equals("")) {
+                if (findStr.equals("")) {
+                    Toast toast = Toast.makeText(getBaseContext(),R.string.kartNotFind, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else
+                {
                     result = model.findSelector(findStr, search_type);
                     for (int i = 0; i < findStr.length(); i++) {
                         switch (i) {
@@ -165,14 +176,7 @@ public class MainActivity extends AppCompatActivity {
                 spinner2.setSelection(0);
                 spinner3.setSelection(0);
                 spinner4.setSelection(0);
-                textView1up.setText("");
-                textView2up.setText("");
-                textView3up.setText("");
-                textView4up.setText("");
-                textView1Down.setText("");
-                textView2Down.setText("");
-                textView3Down.setText("");
-                textView4Down.setText("");
+                clearResult();
             }
         });
 
@@ -198,6 +202,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void clearResult() {
+        textView1up.setText("");
+        textView2up.setText("");
+        textView3up.setText("");
+        textView4up.setText("");
+        textView1Down.setText("");
+        textView2Down.setText("");
+        textView3Down.setText("");
+        textView4Down.setText("");
+    }
+
 
     private String parseResult(String result, int n) {
         String resultParse = "";

@@ -22,6 +22,14 @@ public class Model {
             case SEARCHTYPE.RIGT:
                 result = find(flip(findedStr));
                 break;
+            case SEARCHTYPE.UP:
+                result = findVert(flip(findedStr));
+                result[0] = flip(result[0]);
+                result[1] = flip(result[1]);
+                break;
+            case SEARCHTYPE.DOWN:
+                result = findVert(findedStr);
+                break;
 
         }
     return result;    
@@ -50,9 +58,35 @@ public class Model {
         return result;
     }
 
-    private int findedStrGetLench(String findedStr) {
-        int i = 0;
-        if (findedStr.equals("10")) return 1;
-        else return findedStr.length();
+    public String[] findVert(String findStr) {
+        findStr = flip(findStr);
+        String[] result = new String[2];
+        result[0] = "";
+        result[1] = "";
+        for (int i = 0; i < data.size(); i ++)
+           for (int x = 0; x < 4; x ++) {
+                if (i >= findStr.length() - 1) {
+                    int l;
+                    for ( l = 0; l < findStr.length(); l++)
+                        if (data.get(i - l).charAt(x) != findStr.charAt(l))
+                            break;
+                    if (l == findStr.length()) {
+                        if (x > 0)
+                            for (l = 0; l < findStr.length(); l++ )
+                            result[0] = result[0] + data.get(i - l).charAt(x -1 );
+                        if (x < 3)
+                            for (l = 0; l < findStr.length(); l++ )
+                                result[1] = result[1] + data.get(i - l).charAt(x + 1);
+                    findStr = flip(findStr);
+                    result[0] = flip(result[0]);
+                    result[1] = flip(result[1]);
+                    Log.d("DEBUG", "find-" + findStr + ": " + result[0] + " " + result[1]);
+                    return result;
+                    }
+
+                }
+            }
+
+        return result;
     }
 }
