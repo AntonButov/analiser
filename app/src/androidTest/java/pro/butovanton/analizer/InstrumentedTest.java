@@ -74,5 +74,12 @@ public class InstrumentedTest {
         result = model.findVert("71J7");
         assertTrue(result[0].equals("9797"));
         assertTrue(result[1].equals(""));
+
+        result = model.findSelector("7K77", SEARCHTYPE.RIGHTUP);
+        assertTrue(result[0].equals("999"));
+        assertTrue(result[1].equals("J991"));
+        result = model.findSelector("1QA1", SEARCHTYPE.RIGHTUP);
+        assertTrue(result[0].equals("A7Q7"));
+        assertTrue(result[1].equals("91K7"));
     }
 }

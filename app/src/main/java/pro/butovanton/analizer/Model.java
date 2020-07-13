@@ -21,14 +21,20 @@ public class Model {
                 break;
             case SEARCHTYPE.RIGT:
                 result = find(flip(findedStr));
-                break;
-            case SEARCHTYPE.UP:
-                result = findVert(flip(findedStr));
                 result[0] = flip(result[0]);
                 result[1] = flip(result[1]);
                 break;
-            case SEARCHTYPE.DOWN:
-                result = findVert(findedStr);
+            case SEARCHTYPE.RIGHTUP:
+                result = findRUp(findedStr);
+                break;
+            case SEARCHTYPE.LEFTDOWN:
+
+                break;
+            case SEARCHTYPE.LEFTUP:
+
+                break;
+            case SEARCHTYPE.RIGTDOWN:
+
                 break;
 
         }
@@ -86,7 +92,33 @@ public class Model {
 
                 }
             }
+        return result;
+    }
 
+    public String[] findRUp(String findStr) {
+        String[] result = new String[2];
+        result[0] = "";
+        result[1] = "";
+        for (int i = 0; i < data.size(); i ++)
+            for (int x = 0; x < 4; x ++) {
+                if (i >= findStr.length() - 1 && x + findStr.length() <= 4 ) {
+                    int l;
+                    for ( l = 0; l < findStr.length(); l++)
+                        if (data.get(i - l).charAt(x + l) != findStr.charAt(l))
+                            break;
+                    if (l == findStr.length()) {
+                           for (l = 0; l < findStr.length(); l++ )
+                               if (i - l -1 >= 0)
+                                  result[0] = result[0] + data.get(i - l - 1).charAt(x + l);
+                            for (l = 0; l < findStr.length(); l++ )
+                                if (i + 1 < data.size())
+                                  result[1] = result[1] + data.get(i - l + 1).charAt(x + l);
+                        Log.d("DEBUG", "find-" + findStr + ": " + result[0] + " " + result[1]);
+                        return result;
+                    }
+
+                }
+            }
         return result;
     }
 }
