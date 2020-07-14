@@ -211,7 +211,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         search_type = SEARCHTYPE.DOWN;
                         break;
                     case R.id.radioButtonLUp:
+                        search_type = SEARCHTYPE.LEFTUP;
+                        break;
+                    case R.id.radioButtonLDown:
+                        search_type = SEARCHTYPE.LEFTDOWN;
+                        break;
+                    case R.id.radioButtonRUp:
                         search_type = SEARCHTYPE.RIGHTUP;
+                        break;
+                    case R.id.radioButtonRDown:
+                        search_type = SEARCHTYPE.RIGTDOWN;
                         break;
                 }
             }

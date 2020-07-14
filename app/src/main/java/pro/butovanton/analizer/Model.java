@@ -33,10 +33,12 @@ public class Model {
                 result[1] = flip(result[1]);
                 break;
             case SEARCHTYPE.LEFTUP:
-
+                result = findLeftUp(findedStr);
                 break;
             case SEARCHTYPE.RIGTDOWN:
-
+                result = findLeftUp(flip(findedStr));
+                result[0] = flip(result[0]);
+                result[1] = flip(result[1]);
                 break;
 
         }
@@ -130,19 +132,19 @@ public class Model {
         result[1] = "";
         for (int i = 0; i < data.size(); i ++)
             for (int x = 0; x < 4; x ++) {
-                if (i >= findStr.length() - 1 && x + findStr.length() <= 4 ) {
+                if (i >= findStr.length() - 1 && x - findStr.length() + 1 >= 0 ) {
                     int l;
                     for ( l = 0; l < findStr.length(); l++)
-                        if (data.get(i - l).charAt(x + l) != findStr.charAt(l))
+                        if (data.get(i - l).charAt(x - l) != findStr.charAt(l))
                             break;
                     if (l == findStr.length()) {
                         for (l = 0; l < findStr.length(); l++ )
                             if (i - l -1 >= 0)
-                                result[0] = result[0] + data.get(i - l - 1).charAt(x + l);
+                                result[0] = result[0] + data.get(i - l - 1).charAt(x - l);
                             else result[0] = result[0] + " ";
                         for (l = 0; l < findStr.length(); l++ )
                             if (i + 1 < data.size())
-                                result[1] = result[1] + data.get(i - l + 1).charAt(x + l);
+                                result[1] = result[1] + data.get(i - l + 1).charAt(x - l);
                         return result;
                     }
                 }

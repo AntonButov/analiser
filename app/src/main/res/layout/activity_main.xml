@@ -89,8 +89,8 @@
         android:baselineAligned="false"
         android:orientation="horizontal"
         android:weightSum="4"
-        app:layout_constraintEnd_toStartOf="@+id/buttonFind"
-        app:layout_constraintStart_toEndOf="@+id/buttonClear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -195,7 +195,7 @@
 
     <Button
         android:id="@+id/buttonFind"
-        android:layout_width="40dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
         android:text="Найти"
