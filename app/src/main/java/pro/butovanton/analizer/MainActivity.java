@@ -4,8 +4,6 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,12 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -181,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         radioGroupFindType = findViewById(R.id.radioGroupFindType);
-        radioGroupFindType.check(R.id.radioButtonLeft);
+        radioGroupFindType.check(R.id.radioButtonRight);
         radioGroupFindType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -197,6 +190,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.radioButtonDoun:
                         search_type = SEARCHTYPE.DOWN;
+                        break;
+                    case R.id.radioButtonLUp:
+                        search_type = SEARCHTYPE.RIGHTUP;
                         break;
                 }
             }

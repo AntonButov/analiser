@@ -76,7 +76,7 @@ public class InstrumentedTest {
         assertTrue(result[1].equals(""));
 
         result = model.findSelector("7K77", SEARCHTYPE.RIGHTUP);
-        assertTrue(result[0].equals("999"));
+        assertTrue(result[0].equals("999 "));
         assertTrue(result[1].equals("J991"));
         result = model.findSelector("1QA1", SEARCHTYPE.RIGHTUP);
         assertTrue(result[0].equals("A7Q7"));

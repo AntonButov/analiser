@@ -110,13 +110,13 @@ public class Model {
                            for (l = 0; l < findStr.length(); l++ )
                                if (i - l -1 >= 0)
                                   result[0] = result[0] + data.get(i - l - 1).charAt(x + l);
+                               else result[0] = result[0] + " ";
                             for (l = 0; l < findStr.length(); l++ )
                                 if (i + 1 < data.size())
                                   result[1] = result[1] + data.get(i - l + 1).charAt(x + l);
                         Log.d("DEBUG", "find-" + findStr + ": " + result[0] + " " + result[1]);
                         return result;
                     }
-
                 }
             }
         return result;
