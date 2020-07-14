@@ -6,7 +6,4 @@
     android:layout_height="wrap_content"
     android:ellipsize="marquee"
     android:textSize="10dp"
-    android:layout_margin="1dp"
-    android:autoSizeMaxTextSize="6dp"
-    android:autoSizeMinTextSize="4dp"
     android:textAlignment="inherit"/>
