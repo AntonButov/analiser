@@ -28,7 +28,9 @@ public class Model {
                 result = findRUp(findedStr);
                 break;
             case SEARCHTYPE.LEFTDOWN:
-
+                result = findRUp(flip(findedStr));
+                result[0] = flip(result[0]);
+                result[1] = flip(result[1]);
                 break;
             case SEARCHTYPE.LEFTUP:
 
@@ -38,6 +40,7 @@ public class Model {
                 break;
 
         }
+    Log.d("DEBUG", "find-" + findedStr + ": " + result[0] + " " + result[1]);
     return result;    
     }
 
@@ -114,7 +117,6 @@ public class Model {
                             for (l = 0; l < findStr.length(); l++ )
                                 if (i + 1 < data.size())
                                   result[1] = result[1] + data.get(i - l + 1).charAt(x + l);
-                        Log.d("DEBUG", "find-" + findStr + ": " + result[0] + " " + result[1]);
                         return result;
                     }
                 }

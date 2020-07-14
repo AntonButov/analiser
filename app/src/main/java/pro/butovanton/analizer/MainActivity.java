@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -18,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.InputStream;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 100;
     final String[] carts = {"", "A", "K", "Q", "J", "1", "9", "8", "7"};
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView1up, textView2up, textView3up, textView4up;
     private TextView textView1Down, textView2Down, textView3Down, textView4Down;
     private String findStr1 = "", findStr2 = "", findStr3 = "", findStr4 = "";
+    private ImageView imageViewLeft, imageViewRight, imageViewUp, imageViewDown, imageViewLUp, imageViewLDown, imageViewRightUp, imageViewRDown;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -47,8 +49,25 @@ public class MainActivity extends AppCompatActivity {
         textView3Down = findViewById(R.id.textView3down);
         textView4Down = findViewById(R.id.textView4down);
 
+        imageViewLeft = findViewById(R.id.imageViewLeft);
+        imageViewLeft.setOnClickListener(this);
+        imageViewRight = findViewById(R.id.imageViewRight);
+        imageViewRight.setOnClickListener(this);
+        imageViewUp = findViewById(R.id.imageViewUp);
+        imageViewUp.setOnClickListener(this);
+        imageViewDown = findViewById(R.id.imageViewDown);
+        imageViewDown.setOnClickListener(this);
+        imageViewLUp = findViewById(R.id.imageViewLup);
+        imageViewLUp.setOnClickListener(this);
+        imageViewLDown = findViewById(R.id.imageViewLeftDown);
+        imageViewLDown.setOnClickListener(this);
+        imageViewRightUp = findViewById(R.id.imageViewRUp);
+        imageViewRightUp.setOnClickListener(this);
+        imageViewRDown = findViewById(R.id.imageViewRDown);
+        imageViewRDown.setOnClickListener(this);
+
         spinner1 = findViewById(R.id.spinner);
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.spiner_array, android.R.layout.simple_spinner_item);
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.spiner_array, R.layout.spiner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -64,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         });
         spinner1.setAdapter(adapter);
         spinner2 = findViewById(R.id.spinner2);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.spiner_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.spiner_array, R.layout.spiner);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -80,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         spinner3 = findViewById(R.id.spinner3);
-        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,R.array.spiner_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,R.array.spiner_array, R.layout.spiner);
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner3.setAdapter(adapter3);
         spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -96,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         spinner4 = findViewById(R.id.spinner4);
-        ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this,R.array.spiner_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this,R.array.spiner_array, R.layout.spiner);
         adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner4.setAdapter(adapter4);
         spinner4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -242,6 +261,36 @@ public class MainActivity extends AppCompatActivity {
 
                 return;
             }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+           case R.id.imageViewLeft:
+           radioGroupFindType.check(R.id.radioButtonLeft);
+           break;
+            case R.id.imageViewRight:
+                radioGroupFindType.check(R.id.radioButtonRight);
+                break;
+            case R.id.imageViewUp:
+                radioGroupFindType.check(R.id.radioButtonUp);
+                break;
+            case R.id.imageViewDown:
+                radioGroupFindType.check(R.id.radioButtonDoun);
+                break;
+            case R.id.imageViewLup:
+                radioGroupFindType.check(R.id.radioButtonLUp);
+                break;
+            case R.id.imageViewLeftDown:
+                radioGroupFindType.check(R.id.radioButtonLDown);
+                break;
+            case R.id.imageViewRDown:
+                radioGroupFindType.check(R.id.radioButtonRDown);
+                break;
+            case R.id.imageViewRUp:
+                radioGroupFindType.check(R.id.radioButtonRUp);
+                break;
         }
     }
 }

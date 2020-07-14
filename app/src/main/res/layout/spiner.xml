@@ -1,11 +1,12 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/text1"
-    style="@style/Widget.AppCompat.TextView.SpinnerItem"
-    android:layout_width="match_parent"
+    style="?android:attr/spinnerMode"
+    android:singleLine="true"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:ellipsize="marquee"
-    android:singleLine="true"
-    android:textAlignment="inherit"
-
-
-    android:textSize="24dp" />
+    android:textSize="10dp"
+    android:layout_margin="1dp"
+    android:autoSizeMaxTextSize="6dp"
+    android:autoSizeMinTextSize="4dp"
+    android:textAlignment="inherit"/>
