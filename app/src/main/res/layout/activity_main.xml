@@ -296,7 +296,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="  День  "
-            android:imeOptions="actionSearch"
             android:inputType="number"
             android:maxLines="1"
             android:text="" />
@@ -308,7 +307,6 @@
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
             android:hint=" Месяц "
-            android:imeOptions="actionSearch"
             android:inputType="number"
             android:maxLines="1"
             android:text="" />
@@ -320,7 +318,6 @@
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
             android:hint="   Год   "
-            android:imeOptions="actionSearch"
             android:inputType="number"
             android:maxLines="1"
             android:text="" />

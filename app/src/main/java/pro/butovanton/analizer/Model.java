@@ -56,14 +56,15 @@ public class Model {
         result[0] = "";
         result[1] = "";
         for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).isValid(findConfig)) {
             int fint = data.get(i).data.indexOf(findedStr);
             if (fint != -1) {
                 if (i > 0)
                     result[0] = data.get(i - 1).data.substring(fint, fint + findedStr.length());
-                if (i < data.size()-1)
+                if (i < data.size() - 1)
                     result[1] = data.get(i + 1).data.substring(fint, fint + findedStr.length());
-                Log.d("DEBUG", "find-" + findedStr + ": " + result[0] + " " + result[1]);
                 return result;
+            }
             }
         }
         return result;
@@ -77,24 +78,25 @@ public class Model {
         for (int i = 0; i < data.size(); i ++)
            for (int x = 0; x < 4; x ++) {
                 if (i >= findStr.length() - 1) {
-                    int l;
-                    for ( l = 0; l < findStr.length(); l++)
-                        if (data.get(i - l).data.charAt(x) != findStr.charAt(l))
-                            break;
-                    if (l == findStr.length()) {
-                        if (x > 0)
-                            for (l = 0; l < findStr.length(); l++ )
-                            result[0] = result[0] + data.get(i - l).data.charAt(x -1 );
-                        if (x < 3)
-                            for (l = 0; l < findStr.length(); l++ )
-                                result[1] = result[1] + data.get(i - l).data.charAt(x + 1);
-                    findStr = flip(findStr);
-                    result[0] = flip(result[0]);
-                    result[1] = flip(result[1]);
-                    Log.d("DEBUG", "find-" + findStr + ": " + result[0] + " " + result[1]);
-                    return result;
+                    if (data.get(i).isValid(findConfig)) {
+                        int l;
+                        for (l = 0; l < findStr.length(); l++)
+                            if (data.get(i - l).data.charAt(x) != findStr.charAt(l))
+                                break;
+                        if (l == findStr.length()) {
+                            if (x > 0)
+                                for (l = 0; l < findStr.length(); l++)
+                                    result[0] = result[0] + data.get(i - l).data.charAt(x - 1);
+                            if (x < 3)
+                                for (l = 0; l < findStr.length(); l++)
+                                    result[1] = result[1] + data.get(i - l).data.charAt(x + 1);
+                            findStr = flip(findStr);
+                            result[0] = flip(result[0]);
+                            result[1] = flip(result[1]);
+                            Log.d("DEBUG", "find-" + findStr + ": " + result[0] + " " + result[1]);
+                            return result;
+                        }
                     }
-
                 }
             }
         return result;
@@ -105,21 +107,23 @@ public class Model {
         result[0] = "";
         result[1] = "";
         for (int i = 0; i < data.size(); i ++)
-            for (int x = 0; x < 4; x ++) {
-                if (i >= findStr.length() - 1 && x + findStr.length() <= 4 ) {
-                    int l;
-                    for ( l = 0; l < findStr.length(); l++)
-                        if (data.get(i - l).data.charAt(x + l) != findStr.charAt(l))
-                            break;
-                    if (l == findStr.length()) {
-                           for (l = 0; l < findStr.length(); l++ )
-                               if (i - l -1 >= 0)
-                                  result[0] = result[0] + data.get(i - l - 1).data.charAt(x + l);
-                               else result[0] = result[0] + " ";
-                            for (l = 0; l < findStr.length(); l++ )
+            if (data.get(i).isValid(findConfig)) {
+                for (int x = 0; x < 4; x++) {
+                    if (i >= findStr.length() - 1 && x + findStr.length() <= 4) {
+                        int l;
+                        for (l = 0; l < findStr.length(); l++)
+                            if (data.get(i - l).data.charAt(x + l) != findStr.charAt(l))
+                                break;
+                        if (l == findStr.length()) {
+                            for (l = 0; l < findStr.length(); l++)
+                                if (i - l - 1 >= 0)
+                                    result[0] = result[0] + data.get(i - l - 1).data.charAt(x + l);
+                                else result[0] = result[0] + " ";
+                            for (l = 0; l < findStr.length(); l++)
                                 if (i + 1 < data.size())
-                                  result[1] = result[1] + data.get(i - l + 1).data.charAt(x + l);
-                        return result;
+                                    result[1] = result[1] + data.get(i - l + 1).data.charAt(x + l);
+                            return result;
+                        }
                     }
                 }
             }
@@ -131,7 +135,8 @@ public class Model {
         result[0] = "";
         result[1] = "";
         for (int i = 0; i < data.size(); i ++)
-            for (int x = 0; x < 4; x ++) {
+            for (int x = 0; x < 4; x ++)
+                if (data.get(i).isValid(findConfig)) {
                 if (i >= findStr.length() - 1 && x - findStr.length() + 1 >= 0 ) {
                     int l;
                     for ( l = 0; l < findStr.length(); l++)
@@ -151,4 +156,6 @@ public class Model {
             }
         return result;
     }
+
+
 }

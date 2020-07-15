@@ -52,5 +52,10 @@ public class CSVReader {
 
     private FindConfig parseDataDayMonfYear(String row) {
         FindConfig findConfig = new FindConfig();
+        String[] split = row.split("/");
+        findConfig.day = Integer.parseInt(split[0]);
+        findConfig.monf = Integer.parseInt(split[1]);
+        findConfig.year = Integer.parseInt(split[2]);
+        return findConfig;
     }
 }

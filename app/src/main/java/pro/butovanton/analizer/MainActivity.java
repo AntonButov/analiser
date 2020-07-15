@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -246,6 +247,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         checkBoxFrom = findViewById(R.id.checkBoxFrom);
         checkBoxTo = findViewById(R.id.checkBoxTo);
+        checkBoxFrom.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) checkBoxTo.setChecked(!isChecked);
+            }
+        });
+        checkBoxTo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) checkBoxFrom.setChecked(!isChecked);
+            }
+        });
+
     }
 
     private void clearResult() {

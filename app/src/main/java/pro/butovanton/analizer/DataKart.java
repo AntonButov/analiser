@@ -18,4 +18,13 @@ public class DataKart {
         return data;
     }
 
+    public boolean isValid(FindConfig findConfig) {
+        boolean result = true;
+        if (findConfig.to)
+            if (yaer >= findConfig.year && monf >= findConfig.monf && day > findConfig.day)
+                result = false;
+
+        return result;
+    }
+
 }
