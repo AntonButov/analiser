@@ -4,10 +4,15 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -33,12 +38,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView textView1Down, textView2Down, textView3Down, textView4Down;
     private String findStr1 = "", findStr2 = "", findStr3 = "", findStr4 = "";
     private ImageView imageViewLeft, imageViewRight, imageViewUp, imageViewDown, imageViewLUp, imageViewLDown, imageViewRightUp, imageViewRDown;
+    private EditText editTextDay, editTextMonf, editTextYear;
+    private CheckBox checkBoxFrom, checkBoxTo;
+    private FindConfig findConfig;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        findConfig = new FindConfig();
 
         textView1up = findViewById(R.id.textView1up);
         textView2up = findViewById(R.id.textView2up);
@@ -156,7 +165,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else
                 {
-                    result = model.findSelector(findStr, search_type);
+                    findConfig.day = Integer.parseInt(editTextDay.getText().toString());
+                    findConfig.monf = Integer.parseInt(editTextMonf.getText().toString());
+                    findConfig.year = Integer.parseInt(editTextYear.getText().toString());
+                    findConfig.from = checkBoxFrom.isChecked();
+                    findConfig.to = checkBoxTo.isChecked();
+                    result = model.findSelector(findStr, search_type, findConfig);
                     for (int i = 0; i < findStr.length(); i++) {
                         switch (i) {
                             case (0):
@@ -225,6 +239,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+
+        editTextDay = findViewById(R.id.editTextDay);
+        editTextMonf = findViewById(R.id.editTexMonf);
+        editTextYear = findViewById(R.id.editTexYear);
+
+        checkBoxFrom = findViewById(R.id.checkBoxFrom);
+        checkBoxTo = findViewById(R.id.checkBoxTo);
     }
 
     private void clearResult() {

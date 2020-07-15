@@ -13,30 +13,30 @@ public class Model {
         this.data = data;
     }
     
-    public String[] findSelector(String findedStr, int findType) {
+    public String[] findSelector(String findedStr, int findType, FindConfig findConfig) {
         String[] result = new String[2];
         switch (findType) {
             case SEARCHTYPE.LEFT:
-                result = find(findedStr);
+                result = find(findedStr, findConfig);
                 break;
             case SEARCHTYPE.RIGT:
-                result = find(flip(findedStr));
+                result = find(flip(findedStr), findConfig);
                 result[0] = flip(result[0]);
                 result[1] = flip(result[1]);
                 break;
             case SEARCHTYPE.RIGHTUP:
-                result = findRUp(findedStr);
+                result = findRUp(findedStr, findConfig);
                 break;
             case SEARCHTYPE.LEFTDOWN:
-                result = findRUp(flip(findedStr));
+                result = findRUp(flip(findedStr), findConfig);
                 result[0] = flip(result[0]);
                 result[1] = flip(result[1]);
                 break;
             case SEARCHTYPE.LEFTUP:
-                result = findLeftUp(findedStr);
+                result = findLeftUp(findedStr, findConfig);
                 break;
             case SEARCHTYPE.RIGTDOWN:
-                result = findLeftUp(flip(findedStr));
+                result = findLeftUp(flip(findedStr), findConfig);
                 result[0] = flip(result[0]);
                 result[1] = flip(result[1]);
                 break;
@@ -51,7 +51,7 @@ public class Model {
         return sb.reverse().toString();
     }
 
-    public String[] find(String findedStr) {
+    public String[] find(String findedStr, FindConfig findConfig) {
         String[] result = new String[2];
         result[0] = "";
         result[1] = "";
@@ -69,7 +69,7 @@ public class Model {
         return result;
     }
 
-    public String[] findVert(String findStr) {
+    public String[] findVert(String findStr, FindConfig findConfig) {
         findStr = flip(findStr);
         String[] result = new String[2];
         result[0] = "";
@@ -100,7 +100,7 @@ public class Model {
         return result;
     }
 
-    public String[] findRUp(String findStr) {
+    public String[] findRUp(String findStr, FindConfig findConfig) {
         String[] result = new String[2];
         result[0] = "";
         result[1] = "";
@@ -126,7 +126,7 @@ public class Model {
         return result;
     }
 
-    public String[] findLeftUp(String findStr) {
+    public String[] findLeftUp(String findStr, FindConfig findConfig) {
         String[] result = new String[2];
         result[0] = "";
         result[1] = "";

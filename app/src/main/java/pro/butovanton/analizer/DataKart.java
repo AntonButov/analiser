@@ -4,7 +4,9 @@ import java.util.List;
 
 public class DataKart {
 
-    String dayMonfYr;
+    int day;
+    int monf;
+    int yaer;
     String data;
     String gift;
 

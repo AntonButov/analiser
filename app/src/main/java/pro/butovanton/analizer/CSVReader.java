@@ -29,7 +29,10 @@ public class CSVReader {
                     csvLine = csvLine + row[i];
                 }
                 DataKart dataKart = new DataKart();
-                dataKart.dayMonfYr = row[0];
+                FindConfig findConfig = parseDataDayMonfYear(row[0]);
+                dataKart.day = findConfig.day;
+                dataKart.monf = findConfig.monf;
+                dataKart.yaer = findConfig.year;
                 dataKart.gift = row[1];
                 dataKart.data = csvLine;
                 resultList.add(dataKart);
@@ -45,5 +48,9 @@ public class CSVReader {
         }
         return resultList;
 
+    }
+
+    private FindConfig parseDataDayMonfYear(String row) {
+        FindConfig findConfig = new FindConfig();
     }
 }
