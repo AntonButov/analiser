@@ -15,8 +15,8 @@ public class CSVReader {
         this.inputStream = inputStream;
     }
 
-    public List<String> read() {
-        List<String> resultList = new ArrayList();
+    public List<DataKart> read() {
+        List<DataKart> resultList = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         try {
             String csvLine;
@@ -28,8 +28,11 @@ public class CSVReader {
                     if (row[i].equals("10")) row[i] = "1";
                     csvLine = csvLine + row[i];
                 }
-                resultList.add(csvLine);
-
+                DataKart dataKart = new DataKart();
+                dataKart.dayMonfYr = row[0];
+                dataKart.gift = row[1];
+                dataKart.data = csvLine;
+                resultList.add(dataKart);
             }
         } catch (IOException ex) {
             throw new RuntimeException("Error in reading CSV file: " + ex);

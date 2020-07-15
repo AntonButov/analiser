@@ -44,7 +44,7 @@ public class InstrumentedTest {
     public void check() throws FileNotFoundException {
         InputStream inputStream = context.getResources().openRawResource(R.raw.chance);
         CSVReader csvReader = new CSVReader(inputStream);
-        List<String> read = csvReader.read();
+        List<DataKart> read = csvReader.read();
         assertTrue(read.size() > 0);
         Model model = new Model(read);
         String[] result;

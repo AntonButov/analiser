@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Model {
 
-    private List<String> data;
+    private List<DataKart> data;
 
 
-    public Model(List<String> data) {
+    public Model(List<DataKart> data) {
         this.data = data;
     }
     
@@ -56,12 +56,12 @@ public class Model {
         result[0] = "";
         result[1] = "";
         for (int i = 0; i < data.size(); i++) {
-            int fint = data.get(i).indexOf(findedStr);
+            int fint = data.get(i).data.indexOf(findedStr);
             if (fint != -1) {
                 if (i > 0)
-                    result[0] = data.get(i - 1).substring(fint, fint + findedStr.length());
+                    result[0] = data.get(i - 1).data.substring(fint, fint + findedStr.length());
                 if (i < data.size()-1)
-                    result[1] = data.get(i + 1).substring(fint, fint + findedStr.length());
+                    result[1] = data.get(i + 1).data.substring(fint, fint + findedStr.length());
                 Log.d("DEBUG", "find-" + findedStr + ": " + result[0] + " " + result[1]);
                 return result;
             }
@@ -79,15 +79,15 @@ public class Model {
                 if (i >= findStr.length() - 1) {
                     int l;
                     for ( l = 0; l < findStr.length(); l++)
-                        if (data.get(i - l).charAt(x) != findStr.charAt(l))
+                        if (data.get(i - l).data.charAt(x) != findStr.charAt(l))
                             break;
                     if (l == findStr.length()) {
                         if (x > 0)
                             for (l = 0; l < findStr.length(); l++ )
-                            result[0] = result[0] + data.get(i - l).charAt(x -1 );
+                            result[0] = result[0] + data.get(i - l).data.charAt(x -1 );
                         if (x < 3)
                             for (l = 0; l < findStr.length(); l++ )
-                                result[1] = result[1] + data.get(i - l).charAt(x + 1);
+                                result[1] = result[1] + data.get(i - l).data.charAt(x + 1);
                     findStr = flip(findStr);
                     result[0] = flip(result[0]);
                     result[1] = flip(result[1]);
@@ -109,16 +109,16 @@ public class Model {
                 if (i >= findStr.length() - 1 && x + findStr.length() <= 4 ) {
                     int l;
                     for ( l = 0; l < findStr.length(); l++)
-                        if (data.get(i - l).charAt(x + l) != findStr.charAt(l))
+                        if (data.get(i - l).data.charAt(x + l) != findStr.charAt(l))
                             break;
                     if (l == findStr.length()) {
                            for (l = 0; l < findStr.length(); l++ )
                                if (i - l -1 >= 0)
-                                  result[0] = result[0] + data.get(i - l - 1).charAt(x + l);
+                                  result[0] = result[0] + data.get(i - l - 1).data.charAt(x + l);
                                else result[0] = result[0] + " ";
                             for (l = 0; l < findStr.length(); l++ )
                                 if (i + 1 < data.size())
-                                  result[1] = result[1] + data.get(i - l + 1).charAt(x + l);
+                                  result[1] = result[1] + data.get(i - l + 1).data.charAt(x + l);
                         return result;
                     }
                 }
@@ -135,16 +135,16 @@ public class Model {
                 if (i >= findStr.length() - 1 && x - findStr.length() + 1 >= 0 ) {
                     int l;
                     for ( l = 0; l < findStr.length(); l++)
-                        if (data.get(i - l).charAt(x - l) != findStr.charAt(l))
+                        if (data.get(i - l).data.charAt(x - l) != findStr.charAt(l))
                             break;
                     if (l == findStr.length()) {
                         for (l = 0; l < findStr.length(); l++ )
                             if (i - l -1 >= 0)
-                                result[0] = result[0] + data.get(i - l - 1).charAt(x - l);
+                                result[0] = result[0] + data.get(i - l - 1).data.charAt(x - l);
                             else result[0] = result[0] + " ";
                         for (l = 0; l < findStr.length(); l++ )
                             if (i + 1 < data.size())
-                                result[1] = result[1] + data.get(i - l + 1).charAt(x - l);
+                                result[1] = result[1] + data.get(i - l + 1).data.charAt(x - l);
                         return result;
                     }
                 }
